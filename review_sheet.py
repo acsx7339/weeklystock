@@ -11,11 +11,11 @@ class ReviewExcel():
         self.past_date = seven_days_ago.strftime("%Y-%m-%d")
         print(self.past_date)
         self.sheet_name = self.past_date
+        if self.sheet_name not in self.wb.sheetnames:
+            raise ValueError(f"Sheet '{self.sheet_name}' does not exist in the workbook!")
         
     def update_cell(self):
         sheet = self.wb[self.sheet_name]
-        if self.sheet_name not in self.wb.sheetnames:
-            raise ValueError(f"Sheet '{self.sheet_name}' does not exist in the workbook!")
         # Find the column index for "Name"
         header_row = 1  # Assuming headers are in the first row
         name_column_index = None
@@ -32,9 +32,35 @@ class ReviewExcel():
             stock = twstock.Stock(item)
             past_price = stock.price[-10]
             stocklist_price.append(past_price)
-        print(stocklist_price)
+        return stocklist_price
+
+    def update_row(self, price):
+        sheet = self.wb[self.sheet_name]
+        # Find the next empty row (the first empty row in column 1)
+        next_row = sheet.max_row + 1
+
+        # Find the first row with data (assuming header is in row 1)
+        header = "Close"
+        header_column = sheet.max_column + 1  # Find the first empty column after existing data
+
+        # Add the "Close" header in the first row
+        sheet.cell(row=1, column=header_column, value=header)
+
+        # Add the result_list values starting in row 2
+        for i, value in enumerate(price, start=2):  # Start from row 2, as row 1 is for the header
+            sheet.cell(row=i, column=header_column, value=value)
+
+        # Save the workbook with the new data
+        self.wb.save(self.file_name)
+
+        # Print confirmation
+        print(f"Added new header '{header}' and data {price} starting from column {header_column}.")
+
+
+        
 
 if __name__ == "__main__":
     rw = ReviewExcel()
-    rw.update_cell()
+    price = rw.update_cell()
+    rw.update_row(price)
 
