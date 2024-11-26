@@ -1,6 +1,7 @@
 import openpyxl
 from fugle_marketdata import RestClient
 from datetime import datetime, timedelta
+import twstock
 
 class Update_Excel():
 
@@ -21,19 +22,11 @@ class Update_Excel():
         print(f"Excel 文件已成功创建并保存为 {self.file_name}")
 
     def get_price(self, stock_item):
-        client = RestClient(api_key = 'NTFhZTU0YzItZDk2OC00YTI \
-                    1LWE0YWQtZDhmNjVlZjA2YTY4IDFjMjkyMm \
-                    JjLWYwNDktNDlmZi1hZWM2LTU4ZmYyZWEzMDE3Zg')  # 輸入您的 API key
-        stock = client.stock  # Stock REST API client
         stock_dict = dict()
         for item in stock_item:
-            data = stock.historical.candles(**{"symbol": item, "fields": "close"})
-            print(data)
-            first_item = data['data'][0]
-            # first_date = first_item['date']
-            first_close = first_item['close']
-            print(f"stock: {item}, close price is : {first_close}")
-            stock_dict[item] = first_close
+            stock = twstock.Stock(item)
+            current_price = stock.price[-1]
+            stock_dict[item] = current_price
         return stock_dict
 
 
