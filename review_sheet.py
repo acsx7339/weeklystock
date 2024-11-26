@@ -14,7 +14,7 @@ class ReviewExcel():
         if self.sheet_name not in self.wb.sheetnames:
             raise ValueError(f"Sheet '{self.sheet_name}' does not exist in the workbook!")
         
-    def update_cell(self):
+    def get_price(self):
         sheet = self.wb[self.sheet_name]
         # Find the column index for "Name"
         header_row = 1  # Assuming headers are in the first row
@@ -61,6 +61,6 @@ class ReviewExcel():
 
 if __name__ == "__main__":
     rw = ReviewExcel()
-    price = rw.update_cell()
+    price = rw.get_price()
     rw.update_row(price)
 
