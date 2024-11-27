@@ -51,7 +51,6 @@ def main():
             filter2.append(target)
     logging.info(f"總共有 {len(filter2)} 個通過測試")
     logging.info(f"最終結果為： {filter2}")
-    filter2 = ['1231', '1319']
     result = ue().get_price(filter2)
     ue().add_item(result)
     price = re().get_price()
