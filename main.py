@@ -2,12 +2,14 @@ from GetTWStock import TWStock
 from sharefolder import Finmind as fm
 from candlestick import Yfinance as yf
 import logging
+from update_sheet import Update_Excel as ue
+from review_sheet import ReviewExcel as re
 
 logging.basicConfig(
     level=logging.INFO,   # 設置最低的日誌級別
     format='%(levelname)s - %(message)s',  # 設置日誌格式
     handlers=[
-        logging.FileHandler("result.log"),  # 將日誌寫入文件
+        logging.FileHandler("Archive/result.log"),  # 將日誌寫入文件
         logging.StreamHandler()          # 將日誌輸出到控制台
     ]
 )
@@ -49,6 +51,12 @@ def main():
             filter2.append(target)
     logging.info(f"總共有 {len(filter2)} 個通過測試")
     logging.info(f"最終結果為： {filter2}")
+    filter2 = ['1231', '1319']
+    result = ue().get_price(filter2)
+    ue().add_item(result)
+    price = re().get_price()
+    re().update_row(price)
+
 
 if __name__ == "__main__":
     main()

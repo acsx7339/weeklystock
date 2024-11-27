@@ -30,8 +30,8 @@ class Update_Excel():
         return stock_dict
 
 
-if __name__ == "__main__":
-    e = Update_Excel()
-    item = ['2059', '2330', '2357', '2414', '2545', '3037', '3454', '6024', '6515', '6807']
-    content = e.get_price(item)
-    e.add_item(content)
+# if __name__ == "__main__":
+#     e = Update_Excel()
+#     item = ['2059', '2330', '2357', '2414', '2545', '3037', '3454', '6024', '6515', '6807']
+#     content = e.get_price(item)
+#     e.add_item(content)
