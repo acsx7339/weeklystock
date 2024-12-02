@@ -2,7 +2,7 @@ from GetTWStock import TWStock
 from sharefolder import Finmind as fm
 from candlestick import Yfinance as yf
 import logging
-from update_sheet import Update_Excel as ue
+from update_sheet import UpdateExcel as ue
 from review_sheet import ReviewExcel as re
 
 logging.basicConfig(
