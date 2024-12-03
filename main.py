@@ -67,7 +67,7 @@ def main():
         result = ue().get_price(filter2)
         ue().add_item(result)
         price = re().get_price()
-        re().update_row(price)
+        re().update_prices(price)
     except Exception as e:
         logging.error(f"處理最終結果時發生錯誤: {e}")
 
