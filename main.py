@@ -19,13 +19,12 @@ def main():
     filter1 = []
     for item in stocklist:
         print("-----")
-        print(f"現在測試的是 {item}")
+        logging.info(f"現在測試的是 {item}")
         try:
             stock_content = yf().yahoo_result(item)
             daily_content = yf().daily_status(stock_content)
             Weekly_content = yf().Weekly_status(stock_content)
-            close_price = stock_content["Close"].iloc[-1]
-            
+            close_price = stock_content["Close"].iloc[-1].values[0]
             if (yf().upper_trend(daily_content, "5MA") and  # 只要是往上的就可以
                 yf().upper_trend(daily_content, "10MA") and
                 yf().upper_trend(daily_content, "60MA") and

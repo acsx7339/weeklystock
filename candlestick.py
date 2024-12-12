@@ -31,24 +31,39 @@ class Yfinance:
 
     def Weekly_status(self, content):
         try:
-            Weekly_stock = content['Adj Close'].resample('W').last()
-            Weekly_stock = Weekly_stock.dropna().astype(float)
+            # 確保索引為 DatetimeIndex
+            if not isinstance(content.index, pd.DatetimeIndex):
+                content.index = pd.to_datetime(content.index)
+            
+            # 提取並重命名欄位
+            Weekly_stock = content['Adj Close']
+            Weekly_stock = Weekly_stock.resample('W').last().dropna().astype(float)
+            
+            # 建立資料框並計算移動平均
             Weekly_stock_df = pd.DataFrame(Weekly_stock)
+            Weekly_stock_df.columns = ['Adj Close']  # 確保欄位名稱統一
             Weekly_stock_df['5MA'] = talib.SMA(Weekly_stock_df['Adj Close'], timeperiod=5)
             Weekly_stock_df['10MA'] = talib.SMA(Weekly_stock_df['Adj Close'], timeperiod=10)
+            
+            # 紀錄計算結果
             logging.info(f"週Ｋ的ｍａ值： {Weekly_stock_df[['5MA', '10MA']].tail(2)}")
             return Weekly_stock_df[['5MA', '10MA']].tail(2)
         except Exception as e:
             logging.error(f"計算週Ｋ狀態時發生錯誤: {e}")
             return None
 
+
     def daily_status(self, content):
         try:
             daily_stock = content['Adj Close'].dropna().astype(float)
             daily_stock_df = pd.DataFrame(daily_stock)
+            daily_stock_df.columns = ['Adj Close']  # 修正欄位名稱
+            print(daily_stock_df)  # Debug 檢查
+            # 計算移動平均線
             daily_stock_df['5MA'] = talib.SMA(daily_stock_df['Adj Close'], timeperiod=5)
             daily_stock_df['10MA'] = talib.SMA(daily_stock_df['Adj Close'] - 0.2, timeperiod=10)
             daily_stock_df['60MA'] = talib.SMA(daily_stock_df['Adj Close'], timeperiod=60)
+            
             logging.info(f"日Ｋ的 ｍａ值： {daily_stock_df[['5MA', '10MA', '60MA']].tail(2)}")
             return daily_stock_df[['5MA', '10MA', '60MA']].tail(2)
         except Exception as e:
@@ -123,6 +138,7 @@ class Yfinance:
             return False
 
     def near_price(self, price, ma):
+        logging.info(f"price is {price}, ma is {ma}")
         try:
             if ma * 1.05 >= price >= ma * 1.02:
                 logging.info("收盤價在5ma附近")
