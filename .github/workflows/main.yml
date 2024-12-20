@@ -33,9 +33,7 @@ jobs:
       - name: install code
         run: |
           cd ../..
-          git clone https://github.com/acsx7339/WeeklyStock.git
+          cd ./WeeklyStock/
 
       - name: Run Python Script
-        run: |
-          cd ./WeeklyStock/
-          python3 main.py
+        run: python3 main.py
