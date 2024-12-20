@@ -3,6 +3,7 @@ from candlestick import Yfinance as yf
 import logging
 from update_sheet import UpdateExcel as ue
 from review_sheet import ReviewExcel as re
+from GetTWStock import TWStock
 
 logging.basicConfig(
     level=logging.INFO,   # 設置最低的日誌級別
