@@ -26,6 +26,7 @@ jobs:
           ./configure --prefix=/usr
           make
           sudo make install
+          cd ..
 
       - name: Install Dependencies
         run: pip3 install --upgrade pip && pip3 install twstock FinMind ta-lib yfinance pandas numpy scipy openpyxl
