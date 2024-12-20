@@ -16,9 +16,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: show the dir content
+        run: |
+
       - name: Install System Dependencies
         run: |
-          ls
           sudo apt-get update
           sudo apt-get install -y build-essential wget
           wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
@@ -35,6 +37,8 @@ jobs:
         run: |
           cd ../..
           cd ./WeeklyStock/
+
+      
 
       - name: Run Python Script
         run: |
