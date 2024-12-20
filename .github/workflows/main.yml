@@ -23,7 +23,7 @@ jobs:
           wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
           tar -xzvf ta-lib-0.4.0-src.tar.gz
           ls  # Verify directory structure
-          cd ta-lib-0.4.0  # Adjust if needed
+          cd ./ta-lib  # Adjust if needed
           ./configure --prefix=/usr
           make
           sudo make install
