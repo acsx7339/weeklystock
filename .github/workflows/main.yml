@@ -32,5 +32,6 @@ jobs:
 
       - name: Run Python Script
         run: |
+          ls
           cd ./WeeklyStock/WeeklyStock/
           python3 main.py
