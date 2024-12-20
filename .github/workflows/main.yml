@@ -17,7 +17,8 @@ jobs:
           python-version: '3.9'
 
       - name: show the dir content
-        run: ls 
+        run: |
+          ls 
 
       # - name: Install System Dependencies
       #   run: |
