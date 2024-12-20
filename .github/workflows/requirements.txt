@@ -1,0 +1,8 @@
+twstock
+FinMind
+ta-lib
+yfinance
+pandas
+numpy
+scipy
+openpyxl
