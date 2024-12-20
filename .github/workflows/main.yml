@@ -18,6 +18,7 @@ jobs:
 
       - name: show the dir content
         run: |
+          pwd
           ls 
 
       # - name: Install System Dependencies
