@@ -34,5 +34,5 @@ jobs:
         run: |
           cd ../..
           ls
-          cd ./WeeklyStock/WeeklyStock/
+          cd ./WeeklyStock/
           python3 main.py
