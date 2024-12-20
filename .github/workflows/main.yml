@@ -30,10 +30,12 @@ jobs:
       - name: Install Dependencies
         run: pip3 install --upgrade pip && pip3 install twstock FinMind ta-lib yfinance pandas numpy scipy openpyxl
 
+      - name: install code
+        run: |
+        cd ../..
+        git clone https://github.com/acsx7339/WeeklyStock.git
+
       - name: Run Python Script
         run: |
-          cd ../..
-          ls
-          cd ./WeeklyStock/WeeklyStock/
-          ls
+          cd ./WeeklyStock/
           python3 main.py
