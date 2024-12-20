@@ -17,8 +17,8 @@ jobs:
           python-version: '3.9'
 
       - name: show the dir content
-        run: |
-
+        run: ls 
+        
       - name: Install System Dependencies
         run: |
           sudo apt-get update
