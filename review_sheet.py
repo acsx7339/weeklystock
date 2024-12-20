@@ -19,7 +19,6 @@ class ReviewExcel:
 
     def get_price(self):
         sheet = self.wb[self.sheet_name]
-
         # 找到 "stock" 欄位的索引
         header_row = 1  # 假設標題在第一行
         name_column_index = None

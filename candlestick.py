@@ -3,7 +3,6 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from GetTWStock import TWStock
 from scipy.signal import find_peaks
 import logging
 

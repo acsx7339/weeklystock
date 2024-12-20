@@ -8,7 +8,7 @@ class UpdateExcel:
         self.file_name = "stock_review.xlsx"
         self.wb = openpyxl.load_workbook(self.file_name)
         self.current_date = datetime.now().strftime("%Y-%m-%d")  # 當天日期
-        self.past_date = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")  # 七天前日期
+        self.past_date = (datetime.now() - timedelta(days=21)).strftime("%Y-%m-%d")  # 七天前日期
 
         # 如果當天的工作表不存在，創建新工作表
         if self.current_date in self.wb.sheetnames:

@@ -1,4 +1,3 @@
-from GetTWStock import TWStock
 from sharefolder import Finmind as fm
 from candlestick import Yfinance as yf
 import logging
@@ -15,38 +14,38 @@ logging.basicConfig(
 )
 
 def main():
-    stocklist = TWStock().CODE()
-    filter1 = []
-    for item in stocklist:
-        print("-----")
-        logging.info(f"現在測試的是 {item}")
-        try:
-            stock_content = yf().yahoo_result(item)
-            daily_content = yf().daily_status(stock_content)
-            Weekly_content = yf().Weekly_status(stock_content)
-            close_price = stock_content["Close"].iloc[-1].values[0]
-            if (yf().upper_trend(daily_content, "5MA") and  # 只要是往上的就可以
-                yf().upper_trend(daily_content, "10MA") and
-                yf().upper_trend(daily_content, "60MA") and
-                yf().upper_trend(Weekly_content, "5MA") and 
-                yf().upper_trend(Weekly_content, "10MA") and
-                yf().high_trend(daily_content) and  # 5MA要比10MA高且不能高超過1.08
-                yf().high_trend(Weekly_content) and
-                yf().near_price(close_price, 
-                                yf().daily_status(stock_content)["5MA"].iloc[-1])  # close price is close 5MA
-                # yf().volume_break(stock_content) and
-                # yf().price_break(stock_content)
-               ):
-                if close_price >= 15:
-                    logging.info(f"{item} 通過第一輪測試")
-                    filter1.append(item)
-        except Exception as e:
-            logging.error(f"測試 {item} 時發生錯誤: {e}")
-            continue
+    # stocklist = TWStock().CODE()
+    # filter1 = []
+    # for item in stocklist:
+    #     print("-----")
+    #     logging.info(f"現在測試的是 {item}")
+    #     try:
+    #         stock_content = yf().yahoo_result(item)
+    #         daily_content = yf().daily_status(stock_content)
+    #         Weekly_content = yf().Weekly_status(stock_content)
+    #         close_price = stock_content["Close"].iloc[-1].values[0]
+    #         if (yf().upper_trend(daily_content, "5MA") and  # 只要是往上的就可以
+    #             yf().upper_trend(daily_content, "10MA") and
+    #             yf().upper_trend(daily_content, "60MA") and
+    #             yf().upper_trend(Weekly_content, "5MA") and 
+    #             yf().upper_trend(Weekly_content, "10MA") and
+    #             yf().high_trend(daily_content) and  # 5MA要比10MA高且不能高超過1.08
+    #             yf().high_trend(Weekly_content) and
+    #             yf().near_price(close_price, 
+    #                             yf().daily_status(stock_content)["5MA"].iloc[-1])  # close price is close 5MA
+    #             # yf().volume_break(stock_content) and
+    #             # yf().price_break(stock_content)
+    #            ):
+    #             if close_price >= 15:
+    #                 logging.info(f"{item} 通過第一輪測試")
+    #                 filter1.append(item)
+    #     except Exception as e:
+    #         logging.error(f"測試 {item} 時發生錯誤: {e}")
+    #         continue
 
-    logging.info(f"第一輪通過的有 {filter1}")
-    logging.info("開始第二輪測試")
-    
+    # logging.info(f"第一輪通過的有 {filter1}")
+    # logging.info("開始第二輪測試")
+    filter1 = ['1220', '1414', '2308', '2454', '2496', '3443', '4571', '5269', '6526']
     filter2 = []
     for target in filter1:
         logging.info(f"現在測試的是： {target}")

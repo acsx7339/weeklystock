@@ -27,10 +27,14 @@ class Finmind:
             "stock_id": item,
             "date": date,
         }
+        print(date)
         data = requests.get(self.url, params=parameter)
         data = data.json()
+        print(data)
         data = pd.DataFrame(data['data'])
+        print(data)
         total_seven = data.head(8)
+        print(total_seven)
         total_percent = total_seven['percent'].sum()
         logging.info(f"籌碼為： {total_percent}")
         return(total_percent)
