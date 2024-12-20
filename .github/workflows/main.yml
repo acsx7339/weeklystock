@@ -17,7 +17,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip3 install -r twstock FinMind ta-lib yfinance pandas numpy scipy openpyxl
+        run: pip3 install --upgrade pip && pip3 install twstock FinMind ta-lib yfinance pandas numpy scipy openpyxl
 
       - name: Run Python Script
         run: python3 main.py
