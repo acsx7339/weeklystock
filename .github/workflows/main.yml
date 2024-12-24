@@ -23,7 +23,7 @@ jobs:
       - name: Run Python Script in Docker
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}:/app \  # Mount the repository into the container
-            -w /app \                         # Set working directory inside the container
-            acsx7339/stock:latest \
-            python3 main.py
+          -v /home/runner/work/WeeklyStock/WeeklyStock:/app \
+          -w /app \
+          acsx7339/stock:latest \
+          python3 main.py
