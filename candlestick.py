@@ -55,7 +55,7 @@ class Yfinance:
     def daily_status(self, content):
         try:
             daily_stock = content['Adj Close'].dropna().astype(float)
-            print(f"{daily_stock}")
+            print(f"daily stock: {daily_stock}")
             daily_stock_df = pd.DataFrame(daily_stock)
             daily_stock_df.columns = ['Adj Close']  # 修正欄位名稱
             print(daily_stock_df)  # Debug 檢查
