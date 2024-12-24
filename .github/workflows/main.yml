@@ -2,7 +2,7 @@ name: Daily Python Script
 
 on:
   schedule:
-    # 每天執行一次 (UTC 時間)
+    # 每週一 UTC 21:00 執行
     - cron: '0 21 * * 1'
   workflow_dispatch:
 
@@ -11,37 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          
-      - name: Checkout GitHub Action
+      # Checkout the repository to get the Python script
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: show the dir content
-        run: |
-          pwd
-          ls 
+      # Pull the pre-built Docker image
+      - name: Pull Docker Image
+        run: docker pull acsx7339/stock:latest
 
-      - name: Install System Dependencies
+      # Run the script in the Docker container
+      - name: Run Python Script in Docker
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential wget
-          wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-          tar -xzvf ta-lib-0.4.0-src.tar.gz
-          cd ./ta-lib  # Adjust if needed
-          ./configure --prefix=/usr
-          make
-          sudo make install
-
-      - name: Install Dependencies
-        run: pip3 install --upgrade pip && pip3 install twstock FinMind ta-lib yfinance pandas numpy scipy tqdm openpyxl
-
-      - name: install code
-        run: |
-          cd ../
-
-      - name: Run Python Script
-        run: |
-          python3 main.py
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \  # Mount the repository into the container
+            -w /app \                         # Set working directory inside the container
+            acsx7339/stock:latest \
+            python3 main.py
