@@ -55,6 +55,7 @@ class Yfinance:
     def daily_status(self, content):
         try:
             daily_stock = content['Adj Close'].dropna().astype(float)
+            print(f"{daily_stock}")
             daily_stock_df = pd.DataFrame(daily_stock)
             daily_stock_df.columns = ['Adj Close']  # 修正欄位名稱
             print(daily_stock_df)  # Debug 檢查
@@ -62,7 +63,7 @@ class Yfinance:
             daily_stock_df['5MA'] = talib.SMA(daily_stock_df['Adj Close'], timeperiod=5)
             daily_stock_df['10MA'] = talib.SMA(daily_stock_df['Adj Close'] - 0.2, timeperiod=10)
             daily_stock_df['60MA'] = talib.SMA(daily_stock_df['Adj Close'], timeperiod=60)
-            print(f"日Ｋ的 ｍａ值： {daily_stock_df[['5MA', '10MA', '60MA']].tail(2)}")
+            
             logging.info(f"日Ｋ的 ｍａ值： {daily_stock_df[['5MA', '10MA', '60MA']].tail(2)}")
             return daily_stock_df[['5MA', '10MA', '60MA']].tail(2)
         except Exception as e:
