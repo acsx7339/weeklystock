@@ -25,7 +25,7 @@ jobs:
       - name: Run Python Script in Docker
         run: |
           docker run --rm \
-          -v -v ${PWD}/:/src \
+          -v ${PWD}/:/src \
           -w /src \
           acsx7339/stock:latest \
           bash -c "python3 main.py"
