@@ -27,6 +27,7 @@ jobs:
           docker run --rm \
           -v ${PWD}/:/src \
           -w /src \
+          --user $(id -u):$(id -g) \
           acsx7339/stock:latest \
           bash -c "python3 main.py"
 
