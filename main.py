@@ -22,9 +22,10 @@ def main():
         logging.info(f"現在測試的是 {item}")
         try:
             stock_content = yf().yahoo_result(item)
+            print(stock_content)
             daily_content = yf().daily_status(stock_content)
             Weekly_content = yf().Weekly_status(stock_content)
-            print(stock_content)
+            
             close_price = float(stock_content["Close"].iloc[-1].item())
             if (yf().upper_trend(daily_content, "5MA") and  # 只要是往上的就可以
                 yf().upper_trend(daily_content, "10MA") and

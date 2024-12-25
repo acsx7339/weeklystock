@@ -54,6 +54,7 @@ class Yfinance:
 
     def daily_status(self, content):
         try:
+            print(f"content is {content}")
             daily_stock = content['Adj Close'].dropna().astype(float)
             print(f"daily stock: {daily_stock}")
             daily_stock_df = pd.DataFrame(daily_stock)
