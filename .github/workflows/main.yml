@@ -22,11 +22,11 @@ jobs:
       - name: Pull Docker Image
         run: docker pull acsx7339/stock:latest
 
-      # Run the script in the Docker container
       - name: Run Python Script in Docker
         run: |
           docker run --rm \
           -v /home/runner/work/WeeklyStock/WeeklyStock:/app \
           -w /app \
           acsx7339/stock:latest \
-          python3 main.py
+          bash -c "chown simon:simon /app && python3 main.py"
+
