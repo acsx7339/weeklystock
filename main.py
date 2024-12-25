@@ -9,7 +9,7 @@ logging.basicConfig(
     level=logging.INFO,   # 設置最低的日誌級別
     format='%(levelname)s - %(message)s',  # 設置日誌格式
     handlers=[
-        logging.FileHandler("Archive/result.log"),  # 將日誌寫入文件
+        logging.FileHandler("./result.log"),  # 將日誌寫入文件
         logging.StreamHandler()          # 將日誌輸出到控制台
     ]
 )
