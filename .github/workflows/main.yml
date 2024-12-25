@@ -25,8 +25,8 @@ jobs:
       - name: Run Python Script in Docker
         run: |
           docker run --rm \
-          -v /home/runner/work/WeeklyStock/WeeklyStock:/app \
-          -w /app \
+          -v -v ${PWD}/:/src \
+          -w /src \
           acsx7339/stock:latest \
-          bash -c "chown simon:simon /app && python3 main.py"
+          bash -c "python3 main.py"
 
